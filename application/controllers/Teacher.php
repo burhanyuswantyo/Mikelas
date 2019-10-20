@@ -1,16 +1,12 @@
 <?php
 
-class RegTeacher extends CI_Controller{
-    // public function __construct(){
-    //     parent::__construct();
-    //     $this->load->model('Teacher_model');
-    // }
-
-    public function index(){
-        $data['judul'] = 'Daftar Guru';
-
-        $this->load->view('templates/header', $data);
-        $this->load->view('teacher/register', $data);
-        $this->load->view('templates/footer');
+class Teacher extends CI_Controller{
+    public function index($nama = 'Teacher'){
+        $data['judul'] = 'Teacher';
+        $this->load->view('teacher/templates/header', $data);
+        $this->load->view('teacher/templates/sidebar');
+        $this->load->view('teacher/templates/topbar');
+        $this->load->view('teacher/index');
+        $this->load->view('teacher/templates/footer');
     }
 }

@@ -10,4 +10,9 @@ class Home extends CI_Controller{
 
         //test
     }
+
+    public function test()
+    {
+        echo 'OK';
+    }
 }
