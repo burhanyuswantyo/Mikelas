@@ -1,69 +1,126 @@
-<div id="register" class="animate form registration_form well">
-    <section class="login_content">
-        <img src="asset/image/logo2.png" alt="" width="120">
-        <form method="<?php echo base_url('auth'); ?>">
-            <h1>Buat Akun</h1>
-            <label class="padding-md"><input type="radio" name="toggle"><span> Teacher</span></label>
-            <label class="padding-md"><input type="radio" name="toggle"><span> Student</span></label>
-            <div class="form-group">
-                <div class="col-sm-12">
-                    <input type="text" class="form-control" id="nama" name="nama" placeholder="Nama Lengkap" />
-                </div>
-                <div class="col-sm-12">
-                    <input type="text" class="form-control" id="username" name="username" placeholder="Username" />
-                </div>
-                <div class="col-sm-6">
-                    <input type="password" class="form-control" id="password1" name="password1" placeholder="Password" />
-                </div>
-                <div class="col-sm-6">
-                    <input type="password" class="form-control" id="password2" name="password2" placeholder="Ulangi Password" />
-                </div>
-                <div class="col-sm-12">
-                    <input type="text" class="form-control" id="email" name="email" placeholder="Email" />
-                </div>
-                <div class="col-sm-12">
-                    <input type="text" class="form-control" id="nohp" name="nohp" placeholder="No Handphone" />
-                </div>
-                <div class="col-sm-12 margin-bottom-lg">
-                    <textarea type="text" class="form-control" id="alamat" name="alamat" placeholder="Alamat" cols="30" rows="5" style="resize: none"></textarea>
-                </div>
-                <div class="col-xs-3">
-                    <input type="text" class="form-control" id="tgl" name="tgl" placeholder="Tgl" />
-                </div>
-                <div class="col-xs-5">
-                    <select class="form-control">
-                        <option>Januari</option>
-                        <option>Februari</option>
-                        <option>Maret</option>
-                        <option>April</option>
-                        <option>Mei</option>
-                        <option>Juni</option>
-                        <option>Juli</option>
-                        <option>Agustus</option>
-                        <option>September</option>
-                        <option>Oktober</option>
-                        <option>November</option>
-                        <option>Desember</option>
-                    </select>
-                </div>
-                <div class="col-xs-4">
-                    <input type="text" class="form-control" id="tahun" name="tahun" placeholder="Tahun" />
-                </div>
-                <div>
-                    <button class="btn btn-primary" type="submit">Daftar</button>
-                </div>
+<!-- Pre-loader start -->
+<div class="theme-loader">
+    <div class="ball-scale">
+        <div class='contain'>
+            <div class="ring">
+                <div class="frame"></div>
             </div>
-
-            <div class="clearfix"></div>
-
-            <div class="separator">
-                <p class="change_link">Sudah punya akun?
-                    <a href="#signin" class="to_register"> Masuk </a>
-                </p>
-
-                <div class="clearfix"></div>
-                <br />
+            <div class="ring">
+                <div class="frame"></div>
             </div>
-        </form>
-    </section>
+            <div class="ring">
+                <div class="frame"></div>
+            </div>
+            <div class="ring">
+                <div class="frame"></div>
+            </div>
+            <div class="ring">
+                <div class="frame"></div>
+            </div>
+            <div class="ring">
+                <div class="frame"></div>
+            </div>
+            <div class="ring">
+                <div class="frame"></div>
+            </div>
+            <div class="ring">
+                <div class="frame"></div>
+            </div>
+            <div class="ring">
+                <div class="frame"></div>
+            </div>
+            <div class="ring">
+                <div class="frame"></div>
+            </div>
+        </div>
+    </div>
 </div>
+<!-- Pre-loader end -->
+<section class="login-block">
+    <!-- Container-fluid starts -->
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-sm-12">
+                <form class="md-float-material form-material" action="<?php echo base_url('auth/registration'); ?>" method="post">
+                    <div class="text-center">
+                        <img src="<?php echo base_url('asset/image/logo2.png'); ?>" alt="logo.png" width="120">
+                    </div>
+                    <div class="auth-box card">
+                        <div class="card-block">
+                            <div class="row m-b-20">
+                                <div class="col-md-12">
+                                    <h3 class="text-center txt-primary">Buat Akun</h3>
+                                </div>
+                            </div>
+                            <div class="form-group form-primary">
+                                <input type="text" class="form-control" id="nama" name="nama" placeholder="Nama Lengkap " value="<?php echo set_value('nama'); ?>" />
+                                <?php echo form_error('nama', '<small class="text-danger ml-2">', '</small>'); ?>
+                                <span class="form-bar"></span>
+                            </div>
+                            <div class="form-group form-primary">
+                                <input type="text" class="form-control" id="username" name="username" placeholder="Username" value="<?php echo set_value('username'); ?>" />
+                                <?php echo form_error('username', '<small class="text-danger ml-2">', '</small>'); ?>
+                                <span class="form-bar"></span>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-6">
+                                    <div class="form-group form-primary">
+                                        <input type="password" class="form-control" id="password1" name="password1" placeholder="Password" />
+                                        <?php echo form_error('password1', '<small class="text-danger ml-2">', '</small>'); ?>
+                                        <span class="form-bar"></span>
+                                    </div>
+                                </div>
+                                <div class="col-sm-6">
+                                    <div class="form-group form-primary">
+                                        <input type="password" class="form-control" id="password2" name="password2" placeholder="Ulangi Password" />
+                                        <span class="form-bar"></span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group form-primary">
+                                <input type="text" class="form-control" id="email" name="email" placeholder="Email" value="<?php echo set_value('email'); ?>" />
+                                <?php echo form_error('email', '<small class="text-danger ml-2">', '</small>'); ?>
+                                <span class="form-bar"></span>
+                            </div>
+                            <div class="form-group form-primary">
+                                <input type="text" class="form-control" id="nohp" name="nohp" placeholder="No Handphone" value="<?php echo set_value('nohp'); ?>" />
+                                <span class="form-bar"></span>
+                            </div>
+                            <div class="form-group form-primary">
+                                <textarea type="text" class="form-control" id="alamat" name="alamat" placeholder="Alamat" cols="30" rows="5" style="resize: none" value="<?php echo set_value('alamat'); ?>"></textarea>
+                                <span class="form-bar"></span>
+                            </div>
+                            <div class="form-group form-primary">
+                                <input type="date" class="form-control" id="tgllahir" name="tgllahir" placeholder="tgllahir" value="<?php echo set_value('alamat'); ?>">
+                                <span class="form-bar"></span>
+                            </div>
+                            <div class="row m-t-25 text-left">
+                                <div class="col-md-12">
+                                    <div class="checkbox-fade fade-in-primary">
+                                        <label>
+                                            <input type="checkbox" value="">
+                                            <span class="cr"><i class="cr-icon icofont icofont-ui-check txt-primary"></i></span>
+                                            <span class="text-inverse">I read and accept <a href="#">Terms &amp; Conditions.</a></span>
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row m-t-30">
+                                <div class="col-md-12">
+                                    <button type="submit" class="btn btn-primary btn-md btn-block waves-effect text-center m-b-20">Sign up now</button>
+                                </div>
+                            </div>
+                            <hr>
+                            <div>
+                                <p class="text-inverse text-center m-b-0">Sudah punya akun? <a href="<?php echo base_url('auth'); ?>"><b class="f-w-600">Masuk</b></a></p>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <!-- end of col-sm-12 -->
+        </div>
+        <!-- end of row -->
+    </div>
+    <!-- end of container-fluid -->
+</section>
