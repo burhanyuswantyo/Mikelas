@@ -11,18 +11,18 @@
   <title><?php echo $judul ?></title>
 
   <!-- Bootstrap -->
-  <link href="asset/vendors/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
-  <link href="asset/vendors/bootstrap/dist/css/spacing.css" rel="stylesheet">
+  <link href="<?php echo base_url(); ?>asset/vendors/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="<?php echo base_url(); ?>asset/vendors/bootstrap/dist/css/spacing.css" rel="stylesheet">
 
   <!-- Font Awesome -->
-  <link href="asset/vendors/font-awesome/css/font-awesome.min.css" rel="stylesheet">
+  <link href="<?php echo base_url(); ?>asset/vendors/font-awesome/css/font-awesome.min.css" rel="stylesheet">
   <!-- NProgress -->
-  <link href="asset/vendors/nprogress/nprogress.css" rel="stylesheet">
+  <link href="<?php echo base_url(); ?>asset/vendors/nprogress/nprogress.css" rel="stylesheet">
   <!-- bootstrap-daterangepicker -->
-  <link href="asset/vendors/bootstrap-daterangepicker/daterangepicker.css" rel="stylesheet">
+  <link href="<?php echo base_url(); ?>asset/vendors/bootstrap-daterangepicker/daterangepicker.css" rel="stylesheet">
 
   <!-- Custom Theme Style -->
-  <link href="asset/build/css/custom.min.css" rel="stylesheet">
+  <link href="<?php echo base_url(); ?>asset/build/css/custom.min.css" rel="stylesheet">
 </head>
 
 <body class="nav-md">
@@ -31,15 +31,22 @@
       <div class="col-md-3 left_col">
         <div class="left_col scroll-view">
           <div class="navbar nav_title" style="border: 0;">
-            <a href="index.html" class="site_title text-center"><img src="asset/image/logo.png" width="120" alt=""></a>
+            <a href="<?php echo base_url('student'); ?>" class="site_title text-center"><span><img src="<?php echo base_url(); ?>asset/image/logo.png" width="120" alt=""></span></a>
           </div>
 
           <!-- menu profile quick info -->
-          <div class="text-center">
-            <img src="asset/image/profil.png" alt="..." class="img-rounded bg-green margin-top-lg" width="120">
-            <h2>Burhan Yuswantyo</h2>
-            <span>MAN Yogyakarta 2</span>
+
+          <div class="profile clearfix">
+            <div class="text-center">
+              <img src="<?php echo base_url('asset/image/') . $student['image']; ?>" alt="..." class="img-circle profile_img" alt="..." width="100">
+              <div class="profile_info text-center">
+                <h2><?php echo $student['nama']; ?></h2>
+                <span>MAN Yogyakarta 2</span>
+              </div>
+            </div>
           </div>
+
+
           <!-- /menu profile quick info -->
 
           <br />

@@ -1,4 +1,5 @@
 <?php
+defined('BASEPATH') or exit('No direct script access allowe');
 
 class Teacher extends CI_Controller
 {

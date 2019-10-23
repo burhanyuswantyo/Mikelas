@@ -18,8 +18,7 @@ class Student_model extends CI_model
             if ($student['is_active'] == 1) {
                 if (password_verify($password, $student['password'])) {
                     $data = [
-                        'username' => $student['username'],
-                        'nama' => $student['nama']
+                        'username' => $student['username']
                     ];
                     $this->session->set_userdata($data);
                     redirect('student');
