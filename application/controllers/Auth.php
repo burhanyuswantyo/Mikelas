@@ -58,4 +58,9 @@ class Auth extends CI_Controller
         $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">Berhasil keluar!</div>');
         redirect('auth');
     }
+
+    public function error404()
+    {
+        $this->load->view('auth/error404');
+    }
 }
