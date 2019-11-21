@@ -1,39 +1,54 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 
 <head>
-	<!-- Required meta tags -->
-	<meta charset="utf-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <!-- Meta, title, CSS, favicons, etc. -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
 
-	<!-- Bootstrap CSS -->
-	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
-		integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <title><?php echo $judul ?></title>
 
-    <script src='https://www.google.com/recaptcha/api.js'></script>
-    
-	<title><?php echo $judul; ?></title>
+    <!-- Bootstrap -->
+    <link href="<?php echo base_url(); ?>asset/vendors/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="<?php echo base_url(); ?>asset/vendors/bootstrap/dist/css/spacing.css" rel="stylesheet">
+
+    <!-- Font Awesome -->
+    <link href="<?php echo base_url(); ?>asset/vendors/font-awesome/css/font-awesome.min.css" rel="stylesheet">
+    <!-- NProgress -->
+    <link href="<?php echo base_url(); ?>asset/vendors/nprogress/nprogress.css" rel="stylesheet">
+    <!-- bootstrap-daterangepicker -->
+    <link href="<?php echo base_url(); ?>asset/vendors/bootstrap-daterangepicker/daterangepicker.css" rel="stylesheet">
+
+    <!-- Custom Theme Style -->
+    <link href="<?php echo base_url(); ?>asset/build/css/custom.min.css" rel="stylesheet">
 </head>
 
-<body>
+<body class="nav-md">
+    <div class="container body">
+        <div class="main_container">
+            <div class="col-md-3 left_col">
+                <div class="left_col scroll-view">
+                    <div class="navbar nav_title" style="border: 0;">
+                        <a href="<?php echo base_url('teacher'); ?>" class="site_title text-center"><span><img
+                                    src="<?php echo base_url(); ?>asset/image/logo.png" width="120" alt=""></span></a>
+                    </div>
 
-<nav class="navbar navbar-expand-lg navbar-dark" style="background-color: #048998">
-  <a class="navbar-brand" href="<?php echo base_url(); ?>">
-    <img src="<?php echo base_url(); ?>asset/image/Logo.png" width="90" height="30" alt="">
-  </a>
-  
-  <div class="collapse navbar-collapse" id="navbarSupportedContent">
-    <ul class="navbar-nav mr-auto">
-      <li class="nav-item">
-        <a class="nav-link active" href="<?php echo base_url(); ?>">Home</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="#">About</a>
-      </li>
-    </ul>
-    <form class="form-inline my-2 my-lg-0">
-      <a href="<?php base_url(); ?>login" class=""><button class="btn btn-outline-light px-4" type="button">Login</button></a>
-    </form>
-  </div>
-</nav>
+                    <!-- menu profile quick info -->
 
+                    <div class="profile clearfix">
+                        <div class="text-center">
+                            <img src="<?php echo base_url('asset/image/') . $user['image']; ?>" alt="..."
+                                class="img-circle profile_img" alt="..." width="100">
+                            <div class="profile_info text-center">
+                                <h2><?php echo $user['nama']; ?></h2>
+                                <span>MAN Yogyakarta 2</span>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <!-- /menu profile quick info -->
+
+                    <br />

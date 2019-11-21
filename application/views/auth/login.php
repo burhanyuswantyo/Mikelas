@@ -89,7 +89,7 @@
                             </div>
                             <hr>
                             <div class="">
-                                <p class="text-inverse text-center m-b-0">Belum punya akun? <a href="<?php echo base_url('auth/registration'); ?>"><b class="f-w-600">Daftar</b></a></p>
+                                <p class="text-inverse text-center m-b-0">Belum punya akun? <a href="<?php echo base_url('auth/register'); ?>"><b class="f-w-600">Daftar</b></a></p>
                             </div>
                         </div>
                     </div>

@@ -1,10 +1,10 @@
 <?php
 
-class Student_model extends CI_model
+class User_model extends CI_model
 {
-    public function getAllStudent()
+    public function getAllUser()
     {
-        return $this->db->get('student')->result_array();
+        return $this->db->get('user')->result_array();
     }
 
     public function login()
@@ -12,16 +12,23 @@ class Student_model extends CI_model
         $username = $this->input->post('username');
         $password = $this->input->post('password');
 
-        $student = $this->db->get_where('student', ['username' => $username])->row_array();
+        $user = $this->db->get_where('user', ['username' => $username])->row_array();
 
-        if ($student) {
-            if ($student['is_active'] == 1) {
-                if (password_verify($password, $student['password'])) {
+        if ($user) {
+            if ($user['is_active'] == 1) {
+                if (password_verify($password, $user['password'])) {
                     $data = [
-                        'username' => $student['username']
+                        'username' => $user['username'],
+                        'role_id' => $user['role_id']
                     ];
                     $this->session->set_userdata($data);
-                    redirect('student');
+                    if ($user['role_id'] == 1) {
+                        redirect('admin');
+                    } else if ($user['role_id'] == 2) {
+                        redirect('teacher');
+                    } else if ($user['role_id'] == 3) {
+                        redirect('student');
+                    }
                 } else {
                     $this->session->set_flashdata('message', '<div class="alert alert-danger" role="alert">Password salah!</div>');
                     redirect('auth');
@@ -46,11 +53,12 @@ class Student_model extends CI_model
             'no_hp' => $this->input->post('nohp', true),
             'alamat' => $this->input->post('alamat', true),
             'tgl_lahir' => $this->input->post('tgllahir'),
+            'role' => $this->input->post('role', true),
             'is_active' => 0,
             'date_created' => time(),
             'image' => 'default.jpg'
         ];
 
-        $this->db->insert('student', $data);
+        $this->db->insert('user', $data);
     }
 }

@@ -1,6 +1,5 @@
 <!-- Container atas -->
-<div class="position-relative overflow-hidden p-3 p-md-5 m-md-3 text-center rounded-lg"
-	style="background-color: #3bb4c1">
+<div class="position-relative overflow-hidden p-3 p-md-5 m-md-3 text-center rounded-lg" style="background-color: #3bb4c1">
 	<div class="col-md-5 mx-auto my-4">
 		<img src="asset/image/Logo.png" alt="" width="200">
 	</div>
@@ -10,16 +9,12 @@
 			this example based on Apple’s marketing pages.</p>
 	</div>
 	<div class="col-md-5 mx-auto my-1">
-		<button type="button" class="btn btn-outline-light" data-toggle="modal" data-target="#exampleModalCenter">
-			Daftar Siswa
-		</button>
-		<a class="btn btn-outline-light" href="<?php base_url(); ?>regteacher">Daftar Guru</a>
+		<a class="btn btn-outline-light" href="<?php echo base_url('auth/register'); ?>">Daftar</a>
 	</div>
 </div>
 
 <!-- Modal -->
-<div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
-	aria-hidden="true">
+<div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
 	<div class="modal-dialog modal-dialog-centered" role="document">
 		<div class="modal-content">
 			<div class="modal-header">
@@ -38,8 +33,7 @@
 						</div>
 						<div class="col">
 							<label for="">Nama Belakang</label>
-							<input type="text" name="namabelakang" class="form-control" id="namabelakang"
-								placeholder="">
+							<input type="text" name="namabelakang" class="form-control" id="namabelakang" placeholder="">
 						</div>
 					</div>
 
@@ -81,8 +75,7 @@
 
 					<div class="py-2">
 						<label for="">Alamat</label>
-						<textarea name="alamat" class="form-control" id="alamat" cols="30" rows="5"
-							placeholder=""></textarea>
+						<textarea name="alamat" class="form-control" id="alamat" cols="30" rows="5" placeholder=""></textarea>
 					</div>
 					<label for="">Tanggal Lahir</label>
 					<div class="form-row">
@@ -90,9 +83,9 @@
 						<div class="col-md-3 mb-3">
 							<select class="custom-select d-block w-100" name="tgl" id="tgl">
 								<option value="">Tgl</option>
-								<?php for ($i=1; $i <= 31; $i++) { 
-				echo "<option>$i</option>";
-			} ?>
+								<?php for ($i = 1; $i <= 31; $i++) {
+									echo "<option>$i</option>";
+								} ?>
 							</select>
 						</div>
 						<div class="col-md-6 mb-3">
