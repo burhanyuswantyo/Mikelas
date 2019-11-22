@@ -13,10 +13,10 @@ class Menu extends CI_Controller
         $data['subMenu'] = $this->menu->getSubMenu();
 
         $this->form_validation->set_rules('menu', 'Menu', 'required');
-        $this->form_validation->set_rules('sub_menu', 'Sub Menu', 'required');
-        $this->form_validation->set_rules('menu_id', 'Menu Id', 'required');
-        $this->form_validation->set_rules('url', 'Url', 'required');
-        $this->form_validation->set_rules('icon', 'Icon', 'required');
+        // $this->form_validation->set_rules('sub_menu', 'Sub Menu', 'required');
+        // $this->form_validation->set_rules('menu_id', 'Menu Id', 'required');
+        // $this->form_validation->set_rules('url', 'Url', 'required');
+        // $this->form_validation->set_rules('icon', 'Icon', 'required');
 
         if ($this->form_validation->run() == false) {
             $data['judul'] = 'Menu Management';
@@ -32,14 +32,13 @@ class Menu extends CI_Controller
         }
     }
 
-    public function submenu()
+    public function hapusMenu($id)
     {
-        $this->Menu_model->tambahSubMenu();
-        $this->session->set_flashdata('sub_menu', '<div class="alert alert-success" role="alert">Sub Menu berhasil ditambahkan!</div>');
+        $this->Menu_model->hapusMenu($id);
         redirect('menu');
     }
 
-    public function ubah($id)
+    public function ubahMenu($id)
     {
         $menu = $this->input->post('menu');
         $data = array(
@@ -51,15 +50,29 @@ class Menu extends CI_Controller
         redirect('menu');
     }
 
-    public function hapusMenu($id)
+
+    public function subMenu()
     {
-        $this->Menu_model->hapusMenu($id);
+        $this->Menu_model->tambahSubMenu();
+        $this->session->set_flashdata('sub_menu', '<div class="alert alert-success" role="alert">Sub Menu berhasil ditambahkan!</div>');
         redirect('menu');
     }
 
     public function hapusSubMenu($id)
     {
         $this->Menu_model->hapusSubMenu($id);
+        redirect('menu');
+    }
+
+    public function ubahSubMenu($id)
+    {
+        $menu = $this->input->post('sub');
+        $data = array(
+            'menu' => $menu
+        );
+
+        $this->db->where('id', $id);
+        $this->db->update('user_menu', $data);
         redirect('menu');
     }
 }

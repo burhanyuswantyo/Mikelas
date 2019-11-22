@@ -12,6 +12,16 @@ class Auth extends CI_Controller
 
     public function index()
     {
+        if ($this->session->userdata('username')) {
+            if ($this->session->userdata('role_id') == 2) {
+                redirect('teacher');
+            } elseif ($this->session->userdata('role_id') == 3) {
+                redirect('student');
+            } else {
+                redirect('admin');
+            }
+        }
+
         $this->form_validation->set_rules('username', 'Username', 'trim|required');
         $this->form_validation->set_rules('password', 'Password', 'trim|required');
 
@@ -27,6 +37,16 @@ class Auth extends CI_Controller
 
     public function register()
     {
+        if ($this->session->userdata('username')) {
+            if ($this->session->userdata('role_id') == 2) {
+                redirect('teacher');
+            } elseif ($this->session->userdata('role_id') == 3) {
+                redirect('student');
+            } else {
+                redirect('admin');
+            }
+        }
+
         $this->form_validation->set_rules('nama', 'Nama', 'required|trim');
         $this->form_validation->set_rules('username', 'Username', 'required|trim|is_unique[user.username]', [
             'is_unique' => 'Username telah digunakan'

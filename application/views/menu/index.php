@@ -100,12 +100,12 @@
 <!-- /page content -->
 
 <!-- Modal tambah -->
-<div class="modal fade" id="tambahMenuModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+<div class="modal fade" id="tambahMenuModal" tabindex="-1" role="dialog" aria-labelledby="tambahMenuModalLabel">
     <div class="modal-dialog modal-sm" role="document">
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                <h4 class="modal-title" id="myModalLabel">Tambah Menu</h4>
+                <h4 class="modal-title" id="tambahMenuModalLabel">Tambah Menu</h4>
             </div>
             <div class="modal-body">
                 <form action="<?php echo base_url('menu') ?>" method="post">
@@ -124,18 +124,17 @@
 </div>
 
 <!-- Modal edit -->
-<div class="modal fade" id="ubahMenuModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+<div class="modal fade" id="ubahMenuModal" tabindex="-1" role="dialog" aria-labelledby="ubahMenuModalLabel">
     <div class="modal-dialog modal-sm" role="document">
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                <h4 class="modal-title" id="myModalLabel">Tambah Menu</h4>
+                <h4 class="modal-title" id="ubahMenuModalLabel">Ubah Menu</h4>
             </div>
             <div class="modal-body">
-                <form action="<?php echo base_url('menu/') ?>ubah/<?php echo $m['id']; ?>" method="post">
+                <form action="<?php echo base_url('menu/') ?>ubahmenu/<?php echo $m['id']; ?>" method="post">
                     <div class="form-group">
                         <input type="text" class="form-control" id="menu" name="menu" placeholder="Nama Menu">
-
                     </div>
             </div>
             <div class="modal-footer">
@@ -157,6 +156,50 @@
             </div>
             <div class="modal-body">
                 <form action="<?php echo base_url('menu/submenu') ?>" method="post">
+                    <div class="form-group">
+                        <input type="text" class="form-control" id="sub_menu" name="sub_menu" placeholder="Nama Sub Menu">
+                    </div>
+                    <div class="form-group">
+                        <select name="menu_id" id="menu_id" class="form-control">
+                            <option value="">Pilih Menu</option>
+                            <?php foreach ($menu as $m) : ?>
+                                <option value="<?php echo $m['id']; ?>"><?php echo $m['menu']; ?></option>
+                            <?php endforeach ?>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <input type="text" class="form-control" id="url" name="url" placeholder="Url">
+                    </div>
+                    <div class="form-group">
+                        <input type="text" class="form-control" id="icon" name="icon" placeholder="Icon">
+                    </div>
+                    <div class="form-group">
+                        <div class="checkbox">
+                            <label>
+                                <input type="checkbox" value="1" class="flat" name="is_active" id="is_active" checked> Active
+                            </label>
+                        </div>
+                    </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Tutup</button>
+                <button type="submit" class="btn btn-primary">Simpan</button>
+            </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<!-- Modal Ubah Sub Menu -->
+<div class="modal fade" id="ubahSubMenuModal" tabindex="-1" role="dialog" aria-labelledby="ubahSubMenuModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="ubahSubMenuModalLabel">Ubah Sub Menu</h4>
+            </div>
+            <div class="modal-body">
+                <form action="<?php echo base_url('menu/ubahSubMenu') ?>" method="post">
                     <div class="form-group">
                         <input type="text" class="form-control" id="sub_menu" name="sub_menu" placeholder="Nama Sub Menu">
                     </div>
