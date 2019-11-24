@@ -60,13 +60,13 @@
 
 										<div class="radio radio-inline">
 											<label>
-												<input type="radio" name="role" value="1">
+												<input type="radio" name="role" value="2">
 												<i class="helper"></i>Guru
 											</label>
 										</div>
 										<div class="radio radio-inline">
 											<label>
-												<input type="radio" name="role" value="2">
+												<input type="radio" name="role" value="3">
 												<i class="helper"></i>Siswa
 											</label>
 										</div>

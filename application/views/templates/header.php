@@ -38,7 +38,7 @@
 
                     <div class="profile clearfix">
                         <div class="text-center">
-                            <img src="<?php echo base_url('asset/image/') . $user['image']; ?>" alt="..." class="img-circle profile_img" alt="..." width="100">
+                            <img src="<?php echo base_url('asset/image/profile/') . $user['image']; ?>" alt="..." class="img-circle profile_img" alt="..." width="120" height="120">
                             <div class="profile_info text-center">
                                 <h2><?php echo $user['nama']; ?></h2>
                             </div>

@@ -38,12 +38,12 @@ class Auth extends CI_Controller
     public function register()
     {
         if ($this->session->userdata('username')) {
-            if ($this->session->userdata('role_id') == 2) {
-                redirect('teacher');
-            } elseif ($this->session->userdata('role_id') == 3) {
-                redirect('student');
-            } else {
+            if ($this->session->userdata('role_id') == 1) {
                 redirect('admin');
+            } elseif ($this->session->userdata('role_id') == 2) {
+                redirect('teacher');
+            } else {
+                redirect('student');
             }
         }
 
@@ -67,7 +67,43 @@ class Auth extends CI_Controller
             $this->load->view('auth/templates/footer');
         } else {
             $this->User_model->tambah();
+
             $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">Pendaftaran berhasil, silahkan verifikasi email anda!</div>');
+            redirect('auth');
+        }
+    }
+
+    public function verify()
+    {
+        $email = $this->input->get('email');
+        $token = $this->input->get('token');
+
+        $user = $this->db->get_where('user', ['email' => $email])->row_array();
+
+        if ($user) {
+            $user_token = $this->db->get_where('user_token', ['token' => $token])->row_array();
+            if ($user_token) {
+                if (time() - $user_token['date_created'] < 1800) {
+                    $this->db->set('is_active', 1);
+                    $this->db->where('email', $email);
+                    $this->db->update('user');
+                    $this->db->delete('user_token', ['email' => $email]);
+
+                    $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">Akun berhasil diaktivasi! Silahkan login.</div>');
+                    redirect('auth');
+                } else {
+                    $this->db->delete('user', ['email' => $email]);
+                    $this->db->delete('user_token', ['email' => $email]);
+
+                    $this->session->set_flashdata('message', '<div class="alert alert-danger" role="alert">Akun gagal diaktivasi! Token expired.</div>');
+                    redirect('auth');
+                }
+            } else {
+                $this->session->set_flashdata('message', '<div class="alert alert-danger" role="alert">Akun gagal diaktivasi! Token salah.</div>');
+                redirect('auth');
+            }
+        } else {
+            $this->session->set_flashdata('message', '<div class="alert alert-danger" role="alert">Akun gagal diaktivasi! Email salah.</div>');
             redirect('auth');
         }
     }

@@ -45,21 +45,61 @@ class User_model extends CI_model
 
     public function tambah()
     {
+        $email = $this->input->post('email', true);
         $data = [
             'nama' => $this->input->post('nama', true),
-            'username' => $this->input->post('username', true),
+            'username' => htmlspecialchars($this->input->post('username', true)),
             'password' => password_hash($this->input->post('password1'), PASSWORD_DEFAULT),
-            'email' => $this->input->post('email', true),
+            'email' => htmlspecialchars($email),
             'no_hp' => $this->input->post('nohp', true),
             'alamat' => $this->input->post('alamat', true),
             'tgl_lahir' => $this->input->post('tgllahir'),
-            'role' => $this->input->post('role', true),
+            'role_id' => $this->input->post('role', true),
             'is_active' => 0,
             'date_created' => time(),
             'image' => 'default.jpg'
         ];
 
+        $token = base64_encode(random_bytes(32));
+        $user_token = [
+            'email' => $email,
+            'token' => $token,
+            'date_created' => time()
+        ];
+
         $this->db->insert('user', $data);
+        $this->User_model->_sendEmail($token, 'verify');
+        $this->db->insert('user_token', $user_token);
+    }
+
+    private function _sendEmail($token, $type)
+    {
+        $config = [
+            'protocol' => 'smtp',
+            'smtp_host' => 'ssl://smtp.googlemail.com',
+            'smtp_user' => 'byuswan@gmail.com',
+            'smtp_pass' => 'cooler1521',
+            'smtp_port' => 465,
+            'mailtype' => 'html',
+            'charset' => 'utf-8',
+            'newline' => "\r\n"
+        ];
+        $this->email->initialize($config);
+
+        $this->email->from('byuswan@gmail.com', 'Mikelas');
+        $this->email->to($this->input->post('email'));
+
+        if ($type == 'verify') {
+            $this->email->subject('Verifikasi Akun Mikelas');
+            $this->email->message('Klik link ini untuk verifikasi akun : <a href="' . base_url() . 'auth/verify?email=' . $this->input->post('email') . '&token=' . urlencode($token) . '">VERIFIKASI</a>');
+        }
+
+        if ($this->email->send()) {
+            return true;
+        } else {
+            echo $this->email->print_debugger();
+            die;
+        }
     }
 
     public function tambahRole()
