@@ -18,6 +18,7 @@ class User_model extends CI_model
             if ($user['is_active'] == 1) {
                 if (password_verify($password, $user['password'])) {
                     $data = [
+                        'user_id' => $user['id'],
                         'username' => $user['username'],
                         'role_id' => $user['role_id']
                     ];

@@ -47,7 +47,7 @@ class Profile extends CI_Controller
     public function upload()
     {
         $data['user'] = $this->db->get_where('user', ['username' => $this->session->userdata('username')])->row_array();
-
+        $username = $this->session->userdata('username');
 
         $cek = $_FILES['image']['name'];
 
@@ -66,7 +66,7 @@ class Profile extends CI_Controller
 
                 $new_image = $this->upload->data('file_name');
                 $this->db->set('image', $new_image);
-                $this->db->where('username', 'burhanyuswantyo');
+                $this->db->where('username', $username);
                 $this->db->update('user');
                 $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">Profil berhasil diubah!</div>');
                 redirect('profile');
