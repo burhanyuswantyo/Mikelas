@@ -3,11 +3,16 @@ defined('BASEPATH') or exit('No direct script access allowe');
 
 class Menu extends CI_Controller
 {
+    public function __construct()
+    {
+        parent::__construct();
+        $this->load->library('form_validation');
+        $this->load->model('Menu_model', 'menu');
+    }
+
     public function index()
     {
         $data['user'] = $this->db->get_where('user', ['username' => $this->session->userdata('username')])->row_array();
-
-        $this->load->model('Menu_model', 'menu');
 
         $data['menu'] = $this->db->get('user_menu')->result_array();
         $data['subMenu'] = $this->menu->getSubMenu();
@@ -38,17 +43,7 @@ class Menu extends CI_Controller
         redirect('menu');
     }
 
-    public function ubahMenu($id)
-    {
-        $menu = $this->input->post('menu');
-        $data = array(
-            'menu' => $menu
-        );
 
-        $this->db->where('id', $id);
-        $this->db->update('user_menu', $data);
-        redirect('menu');
-    }
 
 
     public function subMenu()
@@ -74,5 +69,11 @@ class Menu extends CI_Controller
         $this->db->where('id', $id);
         $this->db->update('user_menu', $data);
         redirect('menu');
+    }
+
+    public function getMenu()
+    {
+        $id = $this->input->post('id');
+        echo json_encode($this->menu->getMenu($id));
     }
 }

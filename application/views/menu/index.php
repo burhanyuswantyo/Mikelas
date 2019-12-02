@@ -15,7 +15,7 @@
                 <div class="col-sm-4">
                     <?php echo form_error('menu', '<div class="alert alert-danger" role="alert">', '</div>'); ?>
                     <?php echo $this->session->flashdata('menu'); ?>
-                    <a href="" class="btn btn-primary" data-toggle="modal" data-target="#tambahMenuModal">+ Tambah Menu</a>
+                    <a href="" class="btn btn-primary tambahMenuModal" data-toggle="modal" data-target="#menuModal">+ Tambah Menu</a>
                     <div class="table-responsive">
                         <table class="table table-striped jambo_table bulk_action">
                             <thead>
@@ -32,7 +32,7 @@
                                         <td class="text-center"><?php echo $i; ?></td>
                                         <td class=""><?php echo $m['menu']; ?></td>
                                         <td class="last text-center">
-                                            <a href="" class="label label-success" data-toggle="modal" data-target="#ubahMenuModal">Ubah</a>
+                                            <a href="" class="label label-success ubahMenuModal" data-toggle="modal" data-target="#menuModal" data-id="<?php echo $m['id']; ?>">Ubah</a>
                                             <a href="<?php echo base_url('menu/') ?>hapusMenu/<?php echo $m['id']; ?>" class="label label-danger" onclick="return confirm('Yakin hapus?');">Hapus</a>
                                         </td>
                                     </tr>
@@ -58,7 +58,7 @@
                 <div class="col-sm-8">
                     <?php echo form_error('url', '<div class="alert alert-danger" role="alert">', '</div>'); ?>
                     <?php echo $this->session->flashdata('sub_menu'); ?>
-                    <a href="" class="btn btn-primary" data-toggle="modal" data-target="#tambahSubMenuModal">+ Tambah Sub Menu</a>
+                    <a href="" class="btn btn-primary" data-toggle="modal" data-target="#subMenuModal">+ Tambah Sub Menu</a>
                     <div class="table-responsive">
                         <table class="table table-striped jambo_table bulk_action">
                             <thead>
@@ -83,7 +83,7 @@
                                         <td class=""><?php echo $sm['icon']; ?></td>
                                         <td class="text-center"><?php echo $sm['is_active']; ?></td>
                                         <td class="last text-center">
-                                            <a href="" class="label label-success" data-toggle="modal" data-target="#ubahMenuModal">Ubah</a>
+                                            <a href="" class="label label-success" data-toggle="modal" data-target="#subMenuModal">Ubah</a>
                                             <a href="<?php echo base_url('menu/') ?>hapusSubMenu/<?php echo $sm['id']; ?>" class="label label-danger" onclick="return confirm('Yakin hapus?');">Hapus</a>
                                         </td>
                                     </tr>
@@ -100,12 +100,12 @@
 <!-- /page content -->
 
 <!-- Modal tambah -->
-<div class="modal fade" id="tambahMenuModal" tabindex="-1" role="dialog" aria-labelledby="tambahMenuModalLabel">
+<div class="modal fade" id="menuModal" tabindex="-1" role="dialog" aria-labelledby="menuModalLabel">
     <div class="modal-dialog modal-sm" role="document">
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                <h4 class="modal-title" id="tambahMenuModalLabel">Tambah Menu</h4>
+                <h4 class="modal-title" id="menuModalLabel">Tambah Menu</h4>
             </div>
             <div class="modal-body">
                 <form action="<?php echo base_url('menu') ?>" method="post">
@@ -123,83 +123,16 @@
     </div>
 </div>
 
-<!-- Modal edit -->
-<div class="modal fade" id="ubahMenuModal" tabindex="-1" role="dialog" aria-labelledby="ubahMenuModalLabel">
-    <div class="modal-dialog modal-sm" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                <h4 class="modal-title" id="ubahMenuModalLabel">Ubah Menu</h4>
-            </div>
-            <div class="modal-body">
-                <form action="<?php echo base_url('menu/') ?>ubahmenu/<?php echo $m['id']; ?>" method="post">
-                    <div class="form-group">
-                        <input type="text" class="form-control" id="menu" name="menu" placeholder="Nama Menu">
-                    </div>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal">Tutup</button>
-                <button type="submit" class="btn btn-primary">Simpan</button>
-            </div>
-            </form>
-        </div>
-    </div>
-</div>
-
 <!-- Modal Tambah Sub Menu -->
-<div class="modal fade" id="tambahSubMenuModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+<div class="modal fade" id="subMenuModal" tabindex="-1" role="dialog" aria-labelledby="subMenuModalLabel">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                <h4 class="modal-title" id="myModalLabel">Tambah Sub Menu</h4>
+                <h4 class="modal-title" id="subMenuModalLabel">Tambah Sub Menu</h4>
             </div>
             <div class="modal-body">
                 <form action="<?php echo base_url('menu/submenu') ?>" method="post">
-                    <div class="form-group">
-                        <input type="text" class="form-control" id="sub_menu" name="sub_menu" placeholder="Nama Sub Menu">
-                    </div>
-                    <div class="form-group">
-                        <select name="menu_id" id="menu_id" class="form-control">
-                            <option value="">Pilih Menu</option>
-                            <?php foreach ($menu as $m) : ?>
-                                <option value="<?php echo $m['id']; ?>"><?php echo $m['menu']; ?></option>
-                            <?php endforeach ?>
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <input type="text" class="form-control" id="url" name="url" placeholder="Url">
-                    </div>
-                    <div class="form-group">
-                        <input type="text" class="form-control" id="icon" name="icon" placeholder="Icon">
-                    </div>
-                    <div class="form-group">
-                        <div class="checkbox">
-                            <label>
-                                <input type="checkbox" value="1" class="flat" name="is_active" id="is_active" checked> Active
-                            </label>
-                        </div>
-                    </div>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal">Tutup</button>
-                <button type="submit" class="btn btn-primary">Simpan</button>
-            </div>
-            </form>
-        </div>
-    </div>
-</div>
-
-<!-- Modal Ubah Sub Menu -->
-<div class="modal fade" id="ubahSubMenuModal" tabindex="-1" role="dialog" aria-labelledby="ubahSubMenuModalLabel">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                <h4 class="modal-title" id="ubahSubMenuModalLabel">Ubah Sub Menu</h4>
-            </div>
-            <div class="modal-body">
-                <form action="<?php echo base_url('menu/ubahSubMenu') ?>" method="post">
                     <div class="form-group">
                         <input type="text" class="form-control" id="sub_menu" name="sub_menu" placeholder="Nama Sub Menu">
                     </div>

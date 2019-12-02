@@ -3,6 +3,15 @@ defined('BASEPATH') or exit('No direct script access allowed');
 
 class Menu_model extends CI_Model
 {
+    public function getMenu($id)
+    {
+        $query = "SELECT *
+                FROM `user_menu`
+                WHERE `id` = $id
+        ";
+        return $this->db->query($query)->row_array();
+    }
+
     public function getSubMenu()
     {
         $query = "SELECT `user_sub_menu`.*, `user_menu`.`menu`
@@ -23,6 +32,18 @@ class Menu_model extends CI_Model
         ];
 
         $this->db->insert('user_sub_menu', $data);
+    }
+
+    public function ubahMenu($id)
+    {
+        $menu = $this->input->post('menu');
+        $data = array(
+            'menu' => $menu
+        );
+
+        $this->db->where('id', $id);
+        $this->db->update('user_menu', $data);
+        redirect('menu');
     }
 
     public function hapusMenu($id)

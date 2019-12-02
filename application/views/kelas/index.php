@@ -43,6 +43,13 @@
                         </div>
                         <div class="x_content">
                             <?php echo $m['deskripsi']; ?>
+                            <div class="clear-fix"></div>
+                            <?php
+                                if ($m['video'] != null) {
+                                    ?>
+                                <iframe class="padding-top-md" width="560" height="315" src="<?php echo $m['video'] ?>" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                            <?php } ?>
+
                         </div>
                     </div>
                 </div>

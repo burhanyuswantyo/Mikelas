@@ -14,4 +14,16 @@ class Soal extends CI_Controller
         $this->load->view('soal/index');
         $this->load->view('templates/footer');
     }
+
+    public function tambahSoal()
+    {
+        $data['user'] = $this->db->get_where('user', ['username' => $this->session->userdata('username')])->row_array();
+
+        $data['judul'] = 'Tambah Soal';
+        $this->load->view('templates/header', $data);
+        $this->load->view('templates/sidebar');
+        $this->load->view('templates/topbar');
+        $this->load->view('soal/tambah-soal');
+        $this->load->view('templates/footer');
+    }
 }

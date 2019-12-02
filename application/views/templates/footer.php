@@ -39,6 +39,7 @@
 
 <!-- Custom Theme Scripts -->
 <script src="<?php echo base_url(); ?>asset/build/js/custom.min.js"></script>
+<script src="<?php echo base_url(); ?>asset/js/script.js"></script>
 <script>
   $('.form-check-input').on('click', function() {
     const menuId = $(this).data('menu');
