@@ -40,24 +40,6 @@
 <!-- Custom Theme Scripts -->
 <script src="<?php echo base_url(); ?>asset/build/js/custom.min.js"></script>
 <script src="<?php echo base_url(); ?>asset/js/script.js"></script>
-<script>
-  $('.form-check-input').on('click', function() {
-    const menuId = $(this).data('menu');
-    const roleId = $(this).data('role');
-
-    $.ajax({
-      url: "<?php echo base_url('admin/changeaccess'); ?>",
-      type: 'post',
-      data: {
-        menuId: menuId,
-        roleId: roleId
-      },
-      success: function() {
-        document.location.href = "<?php echo base_url('admin/roleaccess/'); ?>" + roleId;
-      }
-    });
-  });
-</script>
 </body>
 
 </html>

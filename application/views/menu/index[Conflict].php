@@ -109,7 +109,7 @@
             </div>
             <div class="modal-body">
                 <form action="<?php echo base_url('menu') ?>" method="post">
-                    <input type="hidden" name="idm" id="idm">
+                    <input type="hidden" name="id" id="id">
                     <div class="form-group">
                         <input type="text" class="form-control" id="menu" name="menu" placeholder="Nama Menu">
 
@@ -134,7 +134,7 @@
             </div>
             <div class="modal-body">
                 <form action="<?php echo base_url('menu/submenu') ?>" method="post">
-                    <input type="hidden" name="idsm" id="idsm">
+                    <input type="hidden" name="id" id="id">
                     <div class="form-group">
                         <input type="text" class="form-control" id="sub_menu" name="sub_menu" placeholder="Nama Sub Menu">
                     </div>
@@ -142,7 +142,7 @@
                         <select name="menu_id" id="menu_id" class="form-control">
                             <option value="">Pilih Menu</option>
                             <?php foreach ($menu as $m) : ?>
-                                <option id="selectMenu" value="<?php echo $m['id']; ?>"><?php echo $m['menu']; ?></option>
+                                <option value="<?php echo $m['id']; ?>"><?php echo $m['menu']; ?></option>
                             <?php endforeach ?>
                         </select>
                     </div>

@@ -42,14 +42,25 @@ class Admin extends CI_Controller
         }
     }
 
+    public function getRole()
+    {
+        $id = $this->input->post('id');
+        $query = "SELECT *
+                FROM `user_role`
+                WHERE `id` = $id
+        ";
+        echo json_encode($this->db->query($query)->row_array());
+    }
+
     public function hapusRole($id)
     {
         $this->User_model->hapusRole($id);
         redirect('admin/role');
     }
 
-    public function ubahRole($id)
+    public function ubahRole()
     {
+        $id = $this->input->post('id');
         $this->User_model->ubahRole($id);
         redirect('admin/role');
     }

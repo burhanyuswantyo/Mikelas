@@ -43,8 +43,18 @@ class Menu extends CI_Controller
         redirect('menu');
     }
 
+    public function ubahMenu()
+    {
+        $id = $this->input->post('idm');
+        $menu = $this->input->post('menu');
+        $data = array(
+            'menu' => $menu
+        );
 
-
+        $this->db->where('id', $id);
+        $this->db->update('user_menu', $data);
+        redirect('menu');
+    }
 
     public function subMenu()
     {
@@ -59,15 +69,20 @@ class Menu extends CI_Controller
         redirect('menu');
     }
 
-    public function ubahSubMenu($id)
+    public function ubahSubMenu()
     {
-        $menu = $this->input->post('sub');
+        $id = $this->input->post('idsm');
         $data = array(
-            'menu' => $menu
+            'menu_id' => $this->input->post('menu_id'),
+            'sub_menu' => $this->input->post('sub_menu'),
+            'url' => $this->input->post('url'),
+            'icon' => $this->input->post('icon'),
+            'is_active' => $this->input->post('is_active')
         );
 
+
         $this->db->where('id', $id);
-        $this->db->update('user_menu', $data);
+        $this->db->update('user_sub_menu', $data);
         redirect('menu');
     }
 
@@ -75,5 +90,11 @@ class Menu extends CI_Controller
     {
         $id = $this->input->post('id');
         echo json_encode($this->menu->getMenu($id));
+    }
+
+    public function getSubMenu()
+    {
+        $id = $this->input->post('id');
+        echo json_encode($this->menu->getIdSubMenu($id));
     }
 }
