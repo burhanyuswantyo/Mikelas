@@ -26,6 +26,7 @@ class Teacher extends CI_Controller
         } else {
             $this->db->insert('kelas', [
                 'nama' => $this->input->post('nama'),
+                'kode' => strtoupper(random_string('alpha', 5)),
                 'user_id' => $this->session->userdata('user_id')
             ]);
             $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">Kelas berhasil dibuat!</div>');

@@ -15,15 +15,21 @@ class Student extends CI_Controller
         $this->load->view('templates/footer');
     }
 
-    public function profile()
+    public function tambahKelas()
     {
-        $data['user'] = $this->db->get_where('user', ['username' => $this->session->userdata('username')])->row_array();
+        $user = $this->db->get_where('user', ['username' => $this->session->userdata('username')])->row_array();
+        $kode = $this->input->post('kode');
+        $kelas = $this->db->get_where('kelas', ['kode' => $kode])->row_array();
 
-        $data['judul'] = 'Profil';
-        $this->load->view('templates/header', $data);
-        $this->load->view('templates/sidebar');
-        $this->load->view('templates/topbar');
-        $this->load->view('student/profile', $data);
-        $this->load->view('templates/footer');
+        if ($kelas != null) {
+            $data = [
+                'kelas_id' => $kelas['id'],
+                'user_id' => $user['id']
+            ];
+            $this->db->insert('kelas_access', $data);
+            redirect('student');
+        } else {
+            echo 'gagal';
+        }
     }
 }
