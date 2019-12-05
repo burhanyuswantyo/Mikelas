@@ -13,6 +13,20 @@ class Soal extends CI_Controller
     {
         $data['user'] = $this->db->get_where('user', ['username' => $this->session->userdata('username')])->row_array();
 
+        $user_id = $data['user']['id'];
+        $query = "SELECT `soal`.*, `kelas`.`nama`
+                FROM `soal` 
+                JOIN `kelas`
+                ON `soal`.`kelas_id` = `kelas`.`id`
+                JOIN `user`
+                ON `user`.`id` = `kelas`.`user_id`
+                WHERE `user`.`id` = $user_id
+        ";
+
+        $data['soal'] = $this->db->query($query)->result_array();
+        // var_dump($data['soal']);
+        // die;
+
         $data['judul'] = 'Soal';
         $this->load->view('templates/header', $data);
         $this->load->view('templates/sidebar');
