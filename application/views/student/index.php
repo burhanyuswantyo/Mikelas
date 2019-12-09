@@ -44,7 +44,7 @@
                 </ul>
               </li>
             </ul>
-            <a href="<?php echo base_url('kelas/index/') . $k['id']; ?>">
+            <a href="<?php echo base_url('student/kelas/') . $k['id']; ?>">
               <h2 class="padding-sm"><?php echo $k['nama']; ?></h2>
             </a>
             <!-- <h5 class="padding-sm"><?php echo 'Dosen : ' . $k['user_nama']; ?></h5> -->

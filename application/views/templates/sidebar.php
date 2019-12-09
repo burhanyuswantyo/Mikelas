@@ -28,8 +28,10 @@
                 ?>
             <ul class="nav side-menu">
                 <?php foreach ($subMenu as $sm) : ?>
-                    <li><a href="<?php echo base_url($sm['url']); ?>"><i class="<?php echo $sm['icon']; ?>"></i>
-                            <?php echo $sm['sub_menu']; ?> </a></li>
+                    <li>
+                        <a href="<?php echo base_url($sm['url']); ?>"><i class="<?php echo $sm['icon']; ?>"></i>
+                            <?php echo $sm['sub_menu']; ?> </a>
+                    </li>
                 <?php endforeach; ?>
             </ul>
         </div>

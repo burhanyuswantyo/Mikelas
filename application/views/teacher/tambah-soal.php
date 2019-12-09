@@ -15,10 +15,6 @@
         <?php echo form_error('menu', '<div class="alert alert-danger" role="alert">', '</div>'); ?>
         <?php echo $this->session->flashdata('menu'); ?>
 
-
-
-
-
         <div class="col-sm-12">
           <!-- Tab panes -->
 
