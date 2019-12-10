@@ -91,4 +91,15 @@ class Ujian_model extends CI_model
 
         return $this->db->query($query)->result_array();
     }
+
+    public function getJudulUjian()
+    {
+        $query = "SELECT `ujian`.`judul`, `kelas`.`nama`
+        FROM `ujian`
+        JOIN `kelas`
+        ON `ujian`.`kelas_id` = `kelas`.`id`
+        WHERE `ujian`.`id` = 1";
+
+        return $this->db->query($query)->row_array();
+    }
 }

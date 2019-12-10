@@ -14,7 +14,7 @@
                 <div class="col-sm-12">
                     <?php echo form_error('menu', '<div class="alert alert-danger" role="alert">', '</div>'); ?>
                     <?php echo $this->session->flashdata('menu'); ?>
-                    <a href="" class="btn btn-primary" data-toggle="modal" data-target="#ujianModal">+ Buat Ujian</a>
+                    <a href="" class="btn btn-primary" data-toggle="modal" data-target="#ujianModal">+ Tambah Soal</a>
                     <div class="table-responsive">
                         <table class="table table-striped jambo_table bulk_action">
                             <thead>
