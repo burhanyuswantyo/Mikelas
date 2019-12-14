@@ -3,26 +3,20 @@ defined('BASEPATH') or exit('No direct script access allowe');
 
 class Kelas extends CI_Controller
 {
-    public function index($id)
+    public function __construct()
+    {
+        parent::__construct();
+        $this->load->library('form_validation');
+        $this->load->model('Kelas_model', 'kelas');
+    }
+
+    public function index($kelas_id)
     {
         $data['user'] = $this->db->get_where('user', ['username' => $this->session->userdata('username')])->row_array();
-        $data['kelas'] = $this->db->get_where('kelas', ['id' => $id])->row_array();
-        $kelas = $this->db->get_where('kelas', ['id' => $id])->row_array();
+        $data['kelas'] = $this->db->get_where('kelas', ['id' => $kelas_id])->row_array();
+        $kelas = $this->db->get_where('kelas', ['id' => $kelas_id])->row_array();
         $user_id = $this->session->userdata('user_id');
-        // $query = "SELECT *
-        //         FROM `materi`
-        //         WHERE `kelas_id` = $id
-        //         AND `user_id` = $user_id
-        // ";
-        $query = "SELECT `materi`.*, `user`.`nama`
-                FROM `materi` 
-                JOIN `user`
-                ON `materi`.`user_id` = `user`.`id`
-                WHERE `materi`.`kelas_id` = $id
-                AND `materi`.`user_id` = $user_id
-        ";
-
-        $data['materi'] = $this->db->query($query)->result_array();
+        $data['materi'] = $this->kelas->getMateri($kelas_id, $user_id);
 
         $this->form_validation->set_rules('deskripsi', 'Deskripsi', 'required');
 
@@ -34,17 +28,22 @@ class Kelas extends CI_Controller
             $this->load->view('kelas/index', $data);
             $this->load->view('templates/footer');
         } else {
-            $this->db->insert('materi', [
-                'deskripsi' => $this->input->post('deskripsi'),
-                'file' => $this->input->post('file'),
-                'video' => $this->input->post('video'),
-                'user_id' => $kelas['user_id'],
-                'kelas_id' => $kelas['id']
-            ]);
-            $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">Materi berhasil dibagikan!</div>');
-            redirect('kelas/index/' . $kelas['id']);
+            $this->tambahMateri($kelas_id);
         }
     }
+
+    public function tambahMateri($kelas_id)
+    {
+        $data['user'] = $this->db->get_where('user', ['username' => $this->session->userdata('username')])->row_array();
+        $data['kelas'] = $this->db->get_where('kelas', ['id' => $kelas_id])->row_array();
+        $kelas = $this->db->get_where('kelas', ['id' => $kelas_id])->row_array();
+        $user_id = $this->session->userdata('user_id');
+
+        $this->kelas->tambahMateri($kelas_id, $user_id);
+        $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">Materi berhasil dibagikan!</div>');
+        redirect('kelas/index/' . $kelas['id']);
+    }
+
     public function hapusKelas($id)
     {
         $data['user'] = $this->db->get_where('user', ['username' => $this->session->userdata('username')])->row_array();

@@ -60,7 +60,9 @@
                                 <div class="form-group text-right">
                                     <button class="btn btn-primary">Kirim</button>
                                 </div>
+                                <hr>
                             </div>
+
                         </div>
                     </div>
                 </div>
