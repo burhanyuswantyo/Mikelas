@@ -19,14 +19,39 @@
                         <div class="clearfix"></div>
                     </div>
                     <div class="x_content">
-                        <form action="<?php echo base_url('kelas/index/') . $kelas['id']; ?>" method="post">
-                            <textarea id="deskripsi" class="form-control" name="deskripsi" placeholder="Bagikan dengan kelas anda" style="resize: vertical;"></textarea>
-                            <input type="file" name="file" id="file" class="margin-top-md">
-                            <input type="text" id="video" name="video" class="margin-top-md" placeholder="Url Video">
-                            <i class="fa fa-youtube-play"></i>
-                            <div class="text-right">
-                                <button class="btn btn-primary margin-top margin-top-md right">Kirim</button>
+                        <?php echo form_open_multipart('kelas/index/' . $kelas['id']); ?>
+                        <textarea id="deskripsi" class="form-control" name="deskripsi" placeholder="Bagikan dengan kelas anda" style="resize: vertical;"></textarea>
+                        <?php echo form_error('deskripsi', '<small class="text-danger ml-2">', '</small>'); ?>
+                        <div class="x_content">
+                            <div class="" role="tabpanel" data-example-id="togglable-tabs">
+                                <ul id="myTab" class="nav nav-tabs" role="tablist">
+                                    <li role="presentation"><a href="#photo" class="fa fa-photo" id="home-tab" role="tab" data-toggle="tab" aria-expanded="true"></a>
+                                    </li>
+                                    <li role="presentation"><a href="#file" class="fa fa-file-o" role="tab" id="profile-tab" data-toggle="tab" aria-expanded="false"></a>
+                                    </li>
+                                    <li role="presentation"><a href="#video" class="fa fa-youtube-play" role="tab" id="profile-tab2" data-toggle="tab" aria-expanded="false"></a>
+                                    </li>
+                                </ul>
+                                <div id="myTabContent" class="tab-content">
+                                    <div role="tabpanel" class="tab-pane fade" id="photo" aria-labelledby="home-tab">
+                                        <div class="margin-top-md">
+                                            <?php echo form_upload('photo'); ?>
+                                        </div>
+                                    </div>
+                                    <div role="tabpanel" class="tab-pane fade" id="file" aria-labelledby="profile-tab">
+                                        <div class="margin-top-md">
+                                            <?php echo form_upload('file'); ?>
+                                        </div>
+                                    </div>
+                                    <div role="tabpanel" class="tab-pane fade" id="video" aria-labelledby="profile-tab">
+                                        <input type="text" id="video" name="video" class="margin-top-md" placeholder="Url Video">
+                                    </div>
+                                </div>
                             </div>
+                        </div>
+                        <div class="text-right">
+                            <button type="submit" class="btn btn-primary margin-top margin-top-md right">Kirim</button>
+                        </div>
                         </form>
                     </div>
                 </div>
