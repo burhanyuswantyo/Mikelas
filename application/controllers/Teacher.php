@@ -7,8 +7,9 @@ class Teacher extends CI_Controller
     {
         parent::__construct();
         $this->load->library('form_validation');
-        $this->load->model('User_model');
+        $this->load->model('User_model', 'user');
         $this->load->model('Ujian_model', 'ujian');
+        $this->load->model('Kelas_model', 'kelas');
     }
 
     public function index()
@@ -33,6 +34,38 @@ class Teacher extends CI_Controller
             $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">Kelas berhasil dibuat!</div>');
             redirect('teacher');
         }
+    }
+
+    public function materi($id)
+    {
+        $data['user'] = $this->db->get_where('user', ['username' => $this->session->userdata('username')])->row_array();
+        $data['materi'] = $this->db->get_where('materi', ['id' => $id])->row_array();
+
+        $query = "SELECT `materi`.*, `user`.`nama`, `user`.`image`
+                FROM `materi` 
+                JOIN `user`
+                ON `materi`.`user_id` = `user`.`id`
+                WHERE `materi`.`id` = $id
+        ";
+
+        $data['materi'] = $this->db->query($query)->result_array();
+        $data['komentar'] = $this->kelas->getKomentar($id);
+        $data['assignment'] = $this->kelas->getAssignment($id);
+
+        $data['judul'] = 'Materi';
+        $this->load->view('templates/header', $data);
+        $this->load->view('templates/sidebar');
+        $this->load->view('templates/topbar');
+        $this->load->view('teacher/materi');
+        $this->load->view('templates/footer');
+    }
+
+    public function tambahKomentar($materi_id)
+    {
+        $user_id = $this->db->get_where('user', ['username' => $this->session->userdata('username')])->row_array();
+
+        $this->kelas->tambahKomentar($user_id['id'], $materi_id);
+        redirect('teacher/materi/' . $materi_id);
     }
 
     public function ujian()

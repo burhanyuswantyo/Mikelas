@@ -22,8 +22,8 @@
                             <?php echo $m['deskripsi']; ?>
                             <div class="clear-fix"></div>
                             <?php
-                                if ($m['video'] != null) {
-                                    ?>
+                            if ($m['video'] != null) {
+                            ?>
                                 <iframe class="padding-top-md" width="560" height="315" src="<?php echo $m['video'] ?>" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
                             <?php } ?>
 
@@ -39,12 +39,14 @@
                                 <h4>Your work</h4>
                             </div>
                             <div class="x_content">
+                                <?php echo form_open_multipart('student/tambahassignment/' . $m['id']); ?>
                                 <div class="form-group">
-                                    <input type="file">
+                                    <input type="file" name="file" id="file">
                                 </div>
                                 <div class="form-group text-right">
-                                    <button class="btn btn-primary">Upload</button>
+                                    <button type="submit" class="btn btn-primary">Upload</button>
                                 </div>
+                                </form>
                             </div>
                         </div>
                     </div>
@@ -54,15 +56,35 @@
                                 <h4>Komentar</h4>
                             </div>
                             <div class="x_content">
-                                <div class="form-group">
-                                    <textarea type="text" class="form-control" id="alamat" name="alamat" cols="30" rows="5" style="resize: none"></textarea>
-                                </div>
-                                <div class="form-group text-right">
-                                    <button class="btn btn-primary">Kirim</button>
-                                </div>
+                                <form action="<?php echo base_url('student/tambahkomentar/') . $m['id'] ?>" method="post">
+                                    <div class="form-group">
+                                        <textarea type="text" class="form-control" id="komentar" name="komentar" cols="30" rows="5" style="resize: none"></textarea>
+                                    </div>
+                                    <div class="form-group text-right">
+                                        <button type="submit" class="btn btn-primary">Kirim</button>
+                                    </div>
+                                </form>
                                 <hr>
-                            </div>
+                                <?php foreach ($komentar as $k) : ?>
+                                    <ul class="list-unstyled msg_list">
+                                        <li>
+                                            <a>
+                                                <span class="image">
+                                                    <img src="<?php echo base_url('asset/image/profile/') . $k['image']; ?>" alt="">
+                                                </span>
+                                                <span>
+                                                    <span><b><?php echo $k['nama'] ?></b></span>
+                                                </span>
+                                                <span class="message">
+                                                    <?php echo $k['komentar']; ?>
+                                                </span>
+                                            </a>
+                                        </li>
+                                    </ul>
 
+                                <?php endforeach; ?>
+
+                            </div>
                         </div>
                     </div>
                 </div>

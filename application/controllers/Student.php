@@ -7,8 +7,9 @@ class Student extends CI_Controller
     {
         parent::__construct();
         $this->load->library('form_validation');
-        $this->load->model('User_model');
+        $this->load->model('User_model', 'user');
         $this->load->model('Ujian_model', 'ujian');
+        $this->load->model('Kelas_model', 'kelas');
     }
 
     public function index()
@@ -53,6 +54,7 @@ class Student extends CI_Controller
                 ON `materi`.`user_id` = `user`.`id`
                 WHERE `materi`.`kelas_id` = $id
                 AND `materi`.`user_id` = $user_id
+                ORDER BY `materi`.`id` DESC
         ";
 
         $data['materi'] = $this->db->query($query)->result_array();
@@ -80,8 +82,7 @@ class Student extends CI_Controller
         ";
 
         $data['materi'] = $this->db->query($query)->result_array();
-        // var_dump($data['materi']);
-        // die;
+        $data['komentar'] = $this->kelas->getKomentar($id);
 
         $data['judul'] = 'Materi';
         $this->load->view('templates/header', $data);
@@ -105,5 +106,21 @@ class Student extends CI_Controller
         $this->load->view('templates/topbar');
         $this->load->view('student/ujian');
         $this->load->view('templates/footer');
+    }
+
+    public function tambahKomentar($materi_id)
+    {
+        $user_id = $this->db->get_where('user', ['username' => $this->session->userdata('username')])->row_array();
+
+        $this->kelas->tambahKomentar($user_id['id'], $materi_id);
+        redirect('student/materi/' . $materi_id);
+    }
+
+    public function tambahAssignment($materi_id)
+    {
+        $user_id = $this->db->get_where('user', ['username' => $this->session->userdata('username')])->row_array();
+
+        $this->kelas->tambahAssignment($user_id['id'], $materi_id);
+        redirect('student/materi/' . $materi_id);
     }
 }

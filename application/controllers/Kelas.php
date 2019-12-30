@@ -44,6 +44,32 @@ class Kelas extends CI_Controller
         redirect('kelas/index/' . $kelas['id']);
     }
 
+    public function editMateri($id)
+    {
+        $data['user'] = $this->db->get_where('user', ['username' => $this->session->userdata('username')])->row_array();
+        $data['materi'] = $this->db->get_where('materi', ['id' => $id])->row_array();
+
+        $this->form_validation->set_rules('deskripsi', 'Deskripsi', 'required');
+
+        if ($this->form_validation->run() == false) {
+            $data['judul'] = 'Edit Materi';
+            $this->load->view('templates/header', $data);
+            $this->load->view('templates/sidebar');
+            $this->load->view('templates/topbar');
+            $this->load->view('kelas/edit', $data);
+            $this->load->view('templates/footer');
+        } else {
+            $this->kelas->editMateri($id);
+        }
+    }
+
+    public function hapusMateri($id, $kelas_id)
+    {
+
+        $this->db->delete('materi', array('id' => $id));
+        redirect('kelas/index/' . $kelas_id);
+    }
+
     public function hapusKelas($id)
     {
         $data['user'] = $this->db->get_where('user', ['username' => $this->session->userdata('username')])->row_array();
