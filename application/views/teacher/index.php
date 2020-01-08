@@ -16,16 +16,6 @@
       <button class="btn btn-primary" data-toggle="modal" data-target="#buatKelasModal">+ Buat Kelas</button>
     </div>
 
-    <!-- query menu -->
-    <?php
-    $user_id = $this->session->userdata('user_id');
-    $query = "SELECT *
-                  FROM `kelas`
-                  WHERE `user_id` = $user_id
-                  ORDER BY `nama` ASC
-                  ";
-    $kelas = $this->db->query($query)->result_array();
-    ?>
     <div class="row">
       <?php foreach ($kelas as $k) : ?>
         <div class="col-sm-3">
@@ -42,9 +32,9 @@
               </li>
             </ul>
             <a href="<?php echo base_url('kelas/index/') . $k['id']; ?>">
-              <h2 class="padding-sm"><?php echo $k['nama']; ?></h2>
+              <h2 class="padding-left-sm padding-bottom-md"><?php echo $k['nama']; ?></h2>
             </a>
-            <h4 class="padding-sm">60 Siswa</h4>
+            <h5 class="padding-left-sm">Code : <?php echo $k['kode']; ?></h5>
           </div>
         </div>
       <?php endforeach; ?>

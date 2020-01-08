@@ -14,31 +14,28 @@
                 <div class="col-sm-12">
                     <?php echo form_error('menu', '<div class="alert alert-danger" role="alert">', '</div>'); ?>
                     <?php echo $this->session->flashdata('menu'); ?>
-                    <a href="" class="btn btn-primary" data-toggle="modal" data-target="#ujianModal">+ Tambah Soal</a>
                     <div class="table-responsive">
                         <table class="table table-striped jambo_table bulk_action">
-                            <thead>
-                                <tr>
-                                    <th style="width: 1%">No</th>
-                                    <th style="width: 80%">Soal</th>
-                                    <th class="text-center">Action</th>
+                            <form action="<?php echo base_url('teacher/tambahessay/') . $ujian_id ?>" method="POST">
+                                <tr class="even pointer">
+                                    <td width="10%">Soal</td>
+                                    <td width="1%">:</td>
+                                    <td>
+                                        <textarea type="text" class="form-control" id="soal" name="soal" cols="30" rows="5" style="resize: none"><?php echo $essay['soal']; ?></textarea>
+                                    </td>
                                 </tr>
-                            </thead>
-                            <tbody>
-                                <?php $i = 1; ?>
-                                <?php foreach ($soal as $s) : ?>
-                                    <tr class="even pointer">
-                                        <td><?php echo $i; ?></td>
-                                        <td><?php echo $s['soal']; ?></td>
-                                        <td class="text-center">
-                                            <a href="#" class="btn btn-warning btn-xs"><i class="fa fa-folder"></i> Detail</a>
-                                            <a href="<?php echo base_url('teacher/hapuspilgan/') . $s['id']; ?>" class="btn btn-danger btn-xs"><i class="fa fa-trash-o"></i> Hapus</a>
-                                        </td>
-                                    </tr>
-                                    <?php $i++; ?>
-                                <?php endforeach ?>
-                            </tbody>
+                                <tr class="even pointer">
+                                    <td width="10%">Jawaban</td>
+                                    <td width="1%">:</td>
+                                    <td>
+                                        <textarea type="text" class="form-control" id="jawaban" name="jawaban" cols="30" rows="5" style="resize: none"><?php echo $essay['jawaban']; ?></textarea>
+                                    </td>
+                                </tr>
                         </table>
+                        <div class="text-right">
+                            <button type="submit" class="btn btn-primary">Simpan</button>
+                        </div>
+                        </form>
                     </div>
                 </div>
             </div>

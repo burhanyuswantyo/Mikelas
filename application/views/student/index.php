@@ -17,18 +17,6 @@
     </div>
 
     <!-- query menu -->
-    <?php
-    $user_id = $this->session->userdata('user_id');
-    $query = "SELECT `kelas`.`id`, `kelas`.`nama`
-                  FROM `kelas`
-                  JOIN `kelas_access`
-                  ON `kelas`.`id` = `kelas_access`.`kelas_id`
-                  JOIN `user`
-                  ON `user`.`id` = `kelas_access`.`user_id`
-                  WHERE `user`.`id` = $user_id
-                  ";
-    $kelas = $this->db->query($query)->result_array();
-    ?>
     <div class="row">
       <?php foreach ($kelas as $k) : ?>
         <div class="col-sm-3">
@@ -37,9 +25,7 @@
               <li>
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-ellipsis-v"></i></a>
                 <ul class="dropdown-menu" role="menu">
-                  <li><a href="" data-toggle="modal" data-target="#editKelasModal">Edit</a>
-                  </li>
-                  <li><a href="<?php echo base_url('kelas/hapuskelas/') . $k['id']; ?>">Hapus</a>
+                  <li><a href="<?php echo base_url('student/keluarkelas/') . $k['id'] . '/' . $user['id']; ?>">Hapus</a>
                   </li>
                 </ul>
               </li>

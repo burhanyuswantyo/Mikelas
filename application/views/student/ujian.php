@@ -36,9 +36,24 @@
                     <td class="project_progress">
                       <a><?php echo $u['nama']; ?></a>
                     </td>
-                    <td></td>
                     <td class="text-center">
-                      <a href="<?php echo base_url('ujian/pilgan/') . $u['id'] ?>" target="_blank" class="btn btn-success btn-xs"><i class="fa fa-pencil"></i> Kerjakan</a>
+                      <?php if ($u['hasil'] == null) { ?>
+                        <span class="badge bg-red">Belum Dikerjakan</span>
+                      <?php } else { ?>
+                        <span class="badge bg-green">Selesai</span>
+                      <?php } ?>
+                    </td>
+                    <td class="text-center">
+                      <?php if ($u['hasil'] == null) { ?>
+                        <?php if ($u['tipe_id'] == 1) { ?>
+                          <a href="<?php echo base_url('ujian/pilgan/') . $u['id']; ?>" target="_blank" class="btn btn-success btn-xs"><i class="fa fa-pencil"></i> Kerjakan</a>
+                        <?php } else { ?>
+                          <a href="<?php echo base_url('ujian/essay/') . $u['id']; ?>" target="_blank" class="btn btn-success btn-xs"><i class="fa fa-pencil"></i> Kerjakan</a>
+                        <?php } ?>
+                      <?php } else { ?>
+                        <a href="<?php echo base_url('ujian/detail/') . $u['id']; ?>" class="btn btn-warning btn-xs"><i class="fa fa-info-circle"></i> Detail</a>
+
+                      <?php } ?>
                     </td>
                   </tr>
                   <?php $i++; ?>

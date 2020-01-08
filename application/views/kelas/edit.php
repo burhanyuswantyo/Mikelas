@@ -20,7 +20,7 @@
                     </div>
                     <div class="x_content">
                         <?php echo form_open_multipart('kelas/editmateri/' . $materi['id']); ?>
-                        <textarea id="deskripsi" class="form-control" name="deskripsi" placeholder="Bagikan dengan kelas anda" style="resize: vertical;" value="<?php echo $materi['deskripsi']; ?>php"></textarea>
+                        <textarea id="deskripsi" class="form-control" name="deskripsi" placeholder="Bagikan dengan kelas anda" style="resize: vertical;" value=""><?php echo $materi['deskripsi']; ?></textarea>
                         <?php echo form_error('deskripsi', '<small class="text-danger ml-2">', '</small>'); ?>
                         <div class="x_content">
                             <div class="" role="tabpanel" data-example-id="togglable-tabs">

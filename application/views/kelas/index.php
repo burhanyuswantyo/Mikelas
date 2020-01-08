@@ -79,7 +79,7 @@
                             <div class="clearfix"></div>
                         </div>
                         <div class="x_content">
-                            <div class="col-sm-12">
+                            <div class="col-sm-12 margin-bottom-sm">
                                 <?php echo $m['deskripsi']; ?>
                             </div>
                             <div class="clearfix" />

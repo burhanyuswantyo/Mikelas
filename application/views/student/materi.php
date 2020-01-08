@@ -39,14 +39,19 @@
                                 <h4>Your work</h4>
                             </div>
                             <div class="x_content">
-                                <?php echo form_open_multipart('student/tambahassignment/' . $m['id']); ?>
-                                <div class="form-group">
-                                    <input type="file" name="file" id="file">
-                                </div>
-                                <div class="form-group text-right">
-                                    <button type="submit" class="btn btn-primary">Upload</button>
-                                </div>
-                                </form>
+                                <?php if ($cek == null) { ?>
+                                    <?php echo form_open_multipart('student/tambahassignment/' . $m['id']); ?>
+                                    <div class="form-group">
+                                        <input type="file" name="file" id="file">
+                                    </div>
+                                    <div class="form-group text-right">
+                                        <button type="submit" class="btn btn-primary">Upload</button>
+                                    </div>
+                                    </form>
+                                <?php } else { ?>
+                                    <a href="<?php echo base_url('student/hapusassignment/') . $cek['id'] . '/' . $m['id']; ?>" class="fa fa-close"></a>
+                                    <a href="<?php echo base_url('upload/assignment/') . $cek['file']; ?>" class="btn btn-info margin-left-md"><?php echo $cek['file']; ?></a>
+                                <?php } ?>
                             </div>
                         </div>
                     </div>

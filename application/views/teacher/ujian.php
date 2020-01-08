@@ -47,9 +47,9 @@
                     </td>
                     <td class="text-center">
                       <?php if ($u['is_active'] == 1) { ?>
-                        <button type="button" class="btn btn-success btn-xs">Aktif</button>
+                        <a href="<?php echo base_url('teacher/ubahstatus/' . $u['id'] . '/0') ?>" class="btn btn-danger btn-xs">Nonaktifkan</a>
                       <?php } else { ?>
-                        <button type="button" class="btn btn-danger btn-xs">Tidak Aktif</button>
+                        <a href="<?php echo base_url('teacher/ubahstatus/' . $u['id'] . '/1') ?>" class="btn btn-success btn-xs">Aktifkan</a>
                       <?php } ?>
                     </td>
                     <td class="text-center">

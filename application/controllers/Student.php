@@ -15,6 +15,17 @@ class Student extends CI_Controller
     public function index()
     {
         $data['user'] = $this->db->get_where('user', ['username' => $this->session->userdata('username')])->row_array();
+        $user_id = $this->session->userdata('user_id');
+        $query = "SELECT `kelas`.`id`, `kelas`.`nama`
+                  FROM `kelas`
+                  JOIN `kelas_access`
+                  ON `kelas`.`id` = `kelas_access`.`kelas_id`
+                  JOIN `user`
+                  ON `user`.`id` = `kelas_access`.`user_id`
+                  WHERE `user`.`id` = $user_id
+                  ";
+        $data['kelas'] = $this->db->query($query)->result_array();
+
 
         $data['judul'] = 'Kelas';
         $this->load->view('templates/header', $data);
@@ -58,9 +69,6 @@ class Student extends CI_Controller
         ";
 
         $data['materi'] = $this->db->query($query)->result_array();
-        // var_dump($data['materi']);
-        // die;
-
         $data['judul'] = $data['kelas']['nama'];
         $this->load->view('templates/header', $data);
         $this->load->view('templates/sidebar');
@@ -83,6 +91,7 @@ class Student extends CI_Controller
 
         $data['materi'] = $this->db->query($query)->result_array();
         $data['komentar'] = $this->kelas->getKomentar($id);
+        $data['cek'] = $this->db->get_where('materi_assignment', ['user_id' => $this->session->userdata('user_id')])->row_array();
 
         $data['judul'] = 'Materi';
         $this->load->view('templates/header', $data);
@@ -95,10 +104,10 @@ class Student extends CI_Controller
     public function ujian()
     {
         $data['user'] = $this->db->get_where('user', ['username' => $this->session->userdata('username')])->row_array();
-
         $data['ujian'] = $this->ujian->getAllUjianStudent($data['user']['id']);
         $data['kelas'] = $this->ujian->getAllKelas($data['user']['id']);
         $data['tipe'] = $this->ujian->getTipeUjian();
+
 
         $data['judul'] = 'Ujian';
         $this->load->view('templates/header', $data);
@@ -122,5 +131,17 @@ class Student extends CI_Controller
 
         $this->kelas->tambahAssignment($user_id['id'], $materi_id);
         redirect('student/materi/' . $materi_id);
+    }
+
+    public function hapusAssignment($id, $materi_id)
+    {
+        $this->db->delete('materi_assignment', array('id' => $id));
+        redirect('student/materi/' . $materi_id);
+    }
+
+    public function keluarKelas($kelas_id, $user_id)
+    {
+        $this->db->delete('kelas_access', array('kelas_id' => $kelas_id, 'user_id' => $user_id));
+        redirect('student');
     }
 }

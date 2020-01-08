@@ -15,6 +15,13 @@ class Teacher extends CI_Controller
     public function index()
     {
         $data['user'] = $this->db->get_where('user', ['username' => $this->session->userdata('username')])->row_array();
+        $user_id = $this->session->userdata('user_id');
+        $query = "SELECT *
+                  FROM `kelas`
+                  WHERE `user_id` = $user_id
+                  ORDER BY `nama` ASC
+                  ";
+        $data['kelas'] = $this->db->query($query)->result_array();
 
         $this->form_validation->set_rules('nama', 'Nama Kelas', 'required');
 
@@ -109,7 +116,7 @@ class Teacher extends CI_Controller
 
         $query = "SELECT `id`, `soal`, `jawaban`
                     FROM `soal_pilgan`
-                    WHERE `ujian_id` = 2
+                    WHERE `ujian_id` = $ujian_id
                     ";
 
         $result = $this->db->query($query)->result_array();
@@ -120,6 +127,29 @@ class Teacher extends CI_Controller
         $this->load->view('templates/sidebar');
         $this->load->view('templates/topbar');
         $this->load->view('teacher/pilgan');
+        $this->load->view('templates/footer');
+    }
+
+    public function essay($ujian_id)
+    {
+        $data['user'] = $this->db->get_where('user', ['username' => $this->session->userdata('username')])->row_array();
+        $data['ujian_id'] = $ujian_id;
+        $data['essay'] = $this->db->get_where('soal_essay', ['ujian_id' => $ujian_id])->row_array();
+        $data['judul'] = 'Tambah Soal';
+
+        $query = "SELECT `id`, `soal`, `jawaban`
+                    FROM `soal_pilgan`
+                    WHERE `ujian_id` = $ujian_id
+                    ";
+
+        $result = $this->db->query($query)->result_array();
+
+        $data['soal'] = $result;
+
+        $this->load->view('templates/header', $data);
+        $this->load->view('templates/sidebar');
+        $this->load->view('templates/topbar');
+        $this->load->view('teacher/essay');
         $this->load->view('templates/footer');
     }
 
@@ -137,5 +167,25 @@ class Teacher extends CI_Controller
 
         $this->db->delete('soal_pilgan', array('id' => $soal_id));
         redirect('teacher/pilgan/' . $soal_id);
+    }
+
+    public function ubahStatus($ujian_id, $is_active)
+    {
+        $data = array(
+            'is_active' => $is_active
+        );
+
+        $this->db->where('id', $ujian_id);
+        $this->db->update('ujian', $data);
+
+        redirect('teacher/ujian');
+    }
+
+    public function tambahEssay($ujian_id)
+    {
+        $data['user'] = $this->db->get_where('user', ['username' => $this->session->userdata('username')])->row_array();
+
+        $this->ujian->tambahEssay($ujian_id);
+        redirect('teacher/essay/' . $ujian_id);
     }
 }

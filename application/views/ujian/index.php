@@ -1,133 +1,110 @@
-<div class="right_col" role="main">
-  <div class="">
-    <div class="page-title">
-      <div class="title_left padding-bottom-md">
-        <h3><?php echo $judul; ?></h3>
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <!-- Meta, title, CSS, favicons, etc. -->
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title><?php echo $judul['judul']; ?></title>
+
+  <!-- Bootstrap -->
+  <link href="<?php echo base_url(); ?>asset/vendors/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="<?php echo base_url(); ?>asset/vendors/bootstrap/dist/css/spacing.css" rel="stylesheet">
+
+  <!-- Font Awesome -->
+  <link href="<?php echo base_url(); ?>asset/vendors/font-awesome/css/font-awesome.min.css" rel="stylesheet">
+  <!-- NProgress -->
+  <link href="<?php echo base_url(); ?>asset/vendors/nprogress/nprogress.css" rel="stylesheet">
+  <!-- bootstrap-daterangepicker -->
+  <link href="<?php echo base_url(); ?>asset/vendors/bootstrap-daterangepicker/daterangepicker.css" rel="stylesheet">
+</head>
+
+<body style="background-color: #3282b8">
+  <div class="text-center">
+    <h1 class="well"><?php echo $judul['nama'] . ' - ' . $judul['judul']; ?></h1>
+  </div>
+  <div class="container">
+    <?php $i = 1; ?>
+    <?php
+    //List Jawaban
+    foreach ($hasil as $h) {
+      $id = $h['id'];
+      $soal = $h['soal'];
+      $a = $h['a'];
+      $b = $h['b'];
+      $c = $h['c'];
+      $d = $h['d'];
+      $e = $h['e'];
+    ?>
+      <form action="<?php echo base_url('ujian/jawab/' . $ujian['id']) ?>" method="POST">
+        <input type="hidden" name="id[]" value="<?php echo $id; ?>">
+        <input type="hidden" name="jumlah" value="<?php echo $jumlah; ?>">
+        <input type="hidden" name="score_min" value="<?php echo $ujian['score_min']; ?>">
+        <div class="margin-sm well">
+          <table width="100%">
+            <tr>
+              <td>
+                <h4><?php echo $i . '. ' . $h['soal'] ?></h4>
+              </td>
+            </tr>
+            <tr>
+              <td class="padding-sm"><input type="radio" name="pilihan[<?php echo $id; ?>]" value="a"> <?php echo $h['a']; ?></td>
+            </tr>
+            <tr>
+              <td class="padding-sm"><input type="radio" name="pilihan[<?php echo $id; ?>]" value="b"> <?php echo $h['b']; ?></td>
+            </tr>
+            <tr>
+              <td class="padding-sm"><input type="radio" name="pilihan[<?php echo $id; ?>]" value="c"> <?php echo $h['c']; ?></td>
+            </tr>
+            <tr>
+              <td class="padding-sm"><input type="radio" name="pilihan[<?php echo $id; ?>]" value="d"> <?php echo $h['d']; ?></td>
+            </tr>
+            <tr>
+              <td class="padding-sm"><input type="radio" name="pilihan[<?php echo $id; ?>]" value="e"> <?php echo $h['e']; ?></td>
+            </tr>
+          </table>
+        </div>
+        <?php $i++; ?>
+      <?php } ?>
+      <div class="text-right margin-sm">
+        <a href="<?php echo base_url('student/ujian'); ?>" class="btn btn-danger"><i class="fa fa-close"></i> Batal</a>
+        <button type="submit" class="btn btn-success" onclick="return confirm('Apakah Anda yakin dengan jawaban Anda?')"><i class="fa fa-check"></i> Selesai</button>
       </div>
-    </div>
-    <div class="clearfix"></div>
-    <div class="content-wrapper">
-      <div class="container">
-        <!-- Content Header (Page header) -->
-        <section class="content-header">
-          <h1>
-          </h1>
-        </section>
+      </form>
+      <!-- jQuery -->
+      <script src="<?php echo base_url(); ?>asset/vendors/jquery/dist/jquery.min.js"></script>
+      <!-- Bootstrap -->
+      <script src="<?php echo base_url(); ?>asset/vendors/bootstrap/dist/js/bootstrap.min.js"></script>
+      <!-- FastClick -->
+      <script src="<?php echo base_url(); ?>asset/vendors/fastclick/lib/fastclick.js"></script>
+      <!-- NProgress -->
+      <script src="<?php echo base_url(); ?>asset/vendors/nprogress/nprogress.js"></script>
+      <!-- Chart.js -->
+      <script src="<?php echo base_url(); ?>asset/vendors/Chart.js/dist/Chart.min.js"></script>
+      <!-- jQuery Sparklines -->
+      <script src="<?php echo base_url(); ?>asset/vendors/jquery-sparkline/dist/jquery.sparkline.min.js"></script>
+      <!-- Flot -->
+      <script src="<?php echo base_url(); ?>asset/vendors/Flot/jquery.flot.js"></script>
+      <script src="<?php echo base_url(); ?>asset/vendors/Flot/jquery.flot.pie.js"></script>
+      <script src="<?php echo base_url(); ?>asset/vendors/Flot/jquery.flot.time.js"></script>
+      <script src="<?php echo base_url(); ?>asset/vendors/Flot/jquery.flot.stack.js"></script>
+      <script src="<?php echo base_url(); ?>asset/vendors/Flot/jquery.flot.resize.js"></script>
+      <!-- Flot plugins -->
+      <script src="<?php echo base_url(); ?>asset/vendors/flot.orderbars/js/jquery.flot.orderBars.js"></script>
+      <script src="<?php echo base_url(); ?>asset/vendors/flot-spline/js/jquery.flot.spline.min.js"></script>
+      <script src="<?php echo base_url(); ?>asset/vendors/flot.curvedlines/curvedLines.js"></script>
+      <!-- DateJS -->
+      <script src="<?php echo base_url(); ?>asset/vendors/DateJS/build/date.js"></script>
+      <!-- bootstrap-daterangepicker -->
+      <script src="<?php echo base_url(); ?>asset/vendors/moment/min/moment.min.js"></script>
+      <script src="<?php echo base_url(); ?>asset/vendors/bootstrap-daterangepicker/daterangepicker.js"></script>
 
-        <!-- Main content -->
-        <section class="content">
-          <div class="row">
-            <div class="col-md-8">
+      <!-- Custom Theme Scripts -->
+      <script src="<?php echo base_url(); ?>asset/build/js/custom.min.js"></script>
+      <script src="<?php echo base_url(); ?>asset/js/script.js"></script>
+</body>
 
-              <div class="clock" style="margin:2em;"></div>
-              <div class="message"></div>
-
-
-              <?php
-              //List Jawaban
-              foreach ($tampil_soal as $tampil_s) {
-                $id_soal = $tampil_s->id_soal;
-                $nama_soal = $tampil_s->nama_soal;
-                $pertanyaan = $tampil_s->pertanyaan;
-                $option_1 = $tampil_s->option_1;
-                $option_2 = $tampil_s->option_2;
-                $option_3 = $tampil_s->option_3;
-                $option_4 = $tampil_s->option_4;
-                $option_5 = $tampil_s->option_5;
-              }
-
-              ?>
-
-              <div class="box box-primary">
-                <div class="box-header with-border">
-                  <h3 class="box-title"><?php echo $nama_soal; ?></h3>
-                </div>
-                <?php echo form_open('peserta/simpan_jawaban/' . $no_soal); ?>
-                <input type="hidden" name="id_soal" value="<?php echo $id_soal; ?>">
-                <div class="box-body">
-                  <div class="form-group">
-                    <p>No. <?php echo $no_soal; ?></p>
-                    <?php echo $pertanyaan; ?>
-                    <input type="radio" name="jawaban_peserta" value="A" class="flat-red" <?php if ($jawaban_peserta == 'A') echo "checked"; ?>> A. <?php echo $option_1; ?><br>
-                    <input type="radio" name="jawaban_peserta" value="B" class="flat-red" <?php if ($jawaban_peserta == 'B') echo "checked"; ?>> B. <?php echo $option_2; ?><br>
-                    <input type="radio" name="jawaban_peserta" value="C" class="flat-red" <?php if ($jawaban_peserta == 'C') echo "checked"; ?>> C. <?php echo $option_3; ?><br>
-                    <input type="radio" name="jawaban_peserta" value="D" class="flat-red" <?php if ($jawaban_peserta == 'D') echo "checked"; ?>> D. <?php echo $option_4; ?><br>
-                    <input type="radio" name="jawaban_peserta" value="E" class="flat-red" <?php if ($jawaban_peserta == 'E') echo "checked"; ?>> E. <?php echo $option_5; ?><br>
-
-                  </div>
-                </div>
-                <div class="modal-footer">
-                  <button type="submit" class="btn btn-primary pull-left">Simpan dan Lanjutkan</button>
-                  <?php
-                  $next = $no_soal + 1;
-                  echo "<a href='" . base_url('peserta/ujian_cat/' . $next) . "'>
-                            <button type='button' class='btn btn-danger' data-dismiss='modal'>Lewati Soal Ini</button>
-                          </a>";
-                  ?>
-
-                </div>
-                </form>
-              </div>
-            </div>
-
-            <div class="col-md-4">
-              <div class="box box-primary">
-                <div class="box-header with-border">
-                  <h3 class="box-title">Nomor Soal</h3>
-                  <a href="<?php echo base_url('peserta/selesai_ujian') ?>">
-                    <button type="button" class="btn btn-success pull-right"><i class="fa fa-check-circle"></i> Selesai</button>
-                  </a>
-
-                </div>
-                <div class="box-body">
-                  <div class="col-sm-12">
-                    <?php
-
-                    // Nomor Soal
-                    foreach ($data_jawaban as $data_j) {
-                      $list_jawaban = $data_j->list_jawaban;
-                    }
-
-                    $jawaban = explode(",", $list_jawaban);
-                    $nomor = sizeof($jawaban);
-
-                    for ($i = 1; $i <= $nomor; $i++) {
-                      $a = $i - 1;
-                      $jwb = explode(":", $jawaban[$a]);
-                      if ($no_soal == $i) {
-
-                        echo "<div class=\"col-md-3\">";
-                        echo "<a href='" . base_url('peserta/ujian_cat/' . $i) . "' >";
-                        echo "<button type=\"button\" class=\"btn btn-block btn-primary btn-sm\">" . $i . ". " . $jwb[1] . "</button>";
-                        echo "</a>";
-                        echo "</div>";
-                      } elseif ($jwb[2] == "N") {
-
-                        echo "<div class=\"col-md-3\">";
-                        echo "<a href='" . base_url('peserta/ujian_cat/' . $i) . "' >";
-                        echo "<button type=\"button\" class=\"btn btn-block btn-default btn-sm\">" . $i . " .</button>";
-                        echo "</a>";
-                        echo "</div>";
-                      } else {
-
-                        echo "<div class=\"col-md-3\">";
-                        echo "<a href='" . base_url('peserta/ujian_cat/' . $i) . "' >";
-                        echo "<button type=\"button\" class=\"btn btn-block btn-success btn-sm\">" . $i . ". " . $jwb[1] . "</button>";
-                        echo "</a>";
-                        echo "</div>";
-                      }
-                    }
-
-                    ?>
-                  </div>
-
-                </div>
-              </div>
-            </div>
-          </div>
-
-        </section>
-        <!-- /.content -->
-      </div>
-      <!-- /.container -->
-    </div>
+</html>
