@@ -31,7 +31,7 @@
             <div class="col-md-3 left_col">
                 <div class="left_col scroll-view">
                     <div class="navbar nav_title" style="border: 0;">
-                        <a href="<?php echo base_url('teacher'); ?>" class="site_title text-center"><span><img src="<?php echo base_url(); ?>asset/image/logo.png" width="120" alt=""></span></a>
+                        <a href="" class="site_title text-center"><span><img src="<?php echo base_url(); ?>asset/image/Logo.png" width="120" alt=""></span></a>
                     </div>
 
                     <!-- menu profile quick info -->
