@@ -188,4 +188,24 @@ class Teacher extends CI_Controller
         $this->ujian->tambahEssay($ujian_id);
         redirect('teacher/essay/' . $ujian_id);
     }
+
+    public function hasil($ujian_id)
+    {
+        $data['user'] = $this->db->get_where('user', ['username' => $this->session->userdata('username')])->row_array();
+
+        $query = "SELECT `ujian_nilai`.`tanggal`, `user`.`nama`, `ujian_nilai`.`score`, `ujian_nilai`.`keterangan`
+                FROM `user`
+                JOIN `ujian_nilai`
+                ON `user`.`id` = `ujian_nilai`.`user_id`
+                WHERE `ujian_nilai`.`ujian_id` = $ujian_id";
+
+        $data['hasil'] = $this->db->query($query)->result_array();
+
+        $data['judul'] = 'Hasil';
+        $this->load->view('templates/header', $data);
+        $this->load->view('templates/sidebar');
+        $this->load->view('templates/topbar');
+        $this->load->view('teacher/hasil');
+        $this->load->view('templates/footer');
+    }
 }

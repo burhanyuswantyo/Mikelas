@@ -53,6 +53,7 @@
                       <?php } ?>
                     </td>
                     <td class="text-center">
+                      <a href="<?php echo base_url('teacher/hasil/') . $u['id']; ?>" class="btn btn-success btn-xs"><i class="fa fa-bar-chart"></i> Hasil</a>
                       <?php if ($u['tipe_id'] == 1) { ?>
                         <a href="<?php echo base_url('teacher/pilgan/') . $u['id'] ?>" class="btn btn-warning btn-xs"><i class="fa fa-folder"></i> Detail</a>
                       <?php } else { ?>
