@@ -43,7 +43,7 @@
 			<div class="col-sm-12">
 				<form class="md-float-material form-material" action="<?php echo base_url('auth/register'); ?>" method="post">
 					<div class="text-center">
-						<img src="<?php echo base_url('asset/image/logo2.png'); ?>" alt="logo.png" width="120">
+						<img src="<?php echo base_url('asset/image/Logo2.png'); ?>" alt="logo.png" width="120">
 					</div>
 					<div class="auth-box card">
 						<div class="card-block">
